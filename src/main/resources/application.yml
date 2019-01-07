@@ -1,0 +1,7 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.8.155.85:3306/secondhandgoods?TimeZone=UTC&useSSL=false
+    username: root1
+    password: 123

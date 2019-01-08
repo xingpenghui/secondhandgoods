@@ -10,8 +10,8 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- 扫描controller层的注解 -->
-	<context:component-scan base-package="com.qfedu.admin.controller" >
+	<!-- 扫描controller层和auto的注解 -->
+	<context:component-scan base-package="com.qfedu.admin.controller,com.qfedu.auto" >
 	</context:component-scan>
 
 	<!-- 引入注解使用的映射器和适配器，默认的映射器和适配器存在一定缺陷,扫描注解 -->

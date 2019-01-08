@@ -89,6 +89,11 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>-->
 
+	<!--Swagger自动生成接口文档-->
+	<servlet-mapping>
+		<servlet-name>DispatchServlet</servlet-name>
+		<url-pattern>/v2/api-docs</url-pattern>
+	</servlet-mapping>
 	<!-- 9、欢迎页面 -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

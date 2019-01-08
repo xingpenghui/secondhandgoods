@@ -3,8 +3,6 @@
   <display-name>secondhandgoods</display-name>
   
   <!--1、配置spring的配置文件 -->
-
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-*.xml</param-value>
@@ -40,11 +38,11 @@
 		<filter-name>encoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- 	<!-- shiro 过滤器-->
+ 	 <!--shiro 过滤器
     <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <!-- 设置true由servlet容器控制filter的生命周期 -->
+        &lt;!&ndash; 设置true由servlet容器控制filter的生命周期 &ndash;&gt;
         <init-param>
             <param-name>targetFilterLifecycle</param-name>
             <param-value>true</param-value>
@@ -54,7 +52,7 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+-->	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 </web-app>

@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--1、数据源  -->
-    <bean id="adminRealm" class="com.qfedu.shiro.AdminRealm"></bean>
-    <!--2、管理器  -->
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 1、配置自定义数据源-->
+    <bean id="userRelam" class="com.qfedu.shiro.AdminRealm"></bean>
+    <!-- 2、管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="adminRealm"></property>
+        <property name="realm" ref="userRelam"></property>
     </bean>
+
     <!--3、过滤器工厂  -->
     <!--配置ShiroFilter-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <!--管理器  -->
+        <!-- 管理器 -->
         <property name="securityManager" ref="securityManager"></property>
         <!--登入页面-->
         <property name="loginUrl" value="/login.html"></property>
         <!--登入成功页面-->
         <property name="successUrl" value="/index.html"/>
         <!-- 错误页面 -->
-        <property name="unauthorizedUrl" value="/unauth.html"></property>
+        <property name="unauthorizedUrl" value="/unauth.html"/>
         <!--URL的拦截-->
         <property name="filterChainDefinitions" >
             <value>
-                /media/**=anon
+                <!-- anon,匿名访问 -->
+                <!-- 放行静态资源 -->
+               <!-- /media/**=anon
                 /login.html=anon
-                /adminlogin.do=anon
-                /goodsadd.html=anon
-                /addGoods.do=anon
-                /goodsslist.html=anon
-                /goodslist.do=anon
-                /delGoods.do=anon
-                /goodssupdate.html=anon
-                /updateGoods.do=anon
-                /roleall.do=anon
-                /photoadd.html=anon
-                /uploadfile.do=anon
-                /addimg.do=anon
-                /**=authc
+                /login.do=anon-->
+                <!-- authc,必须有票据才能访问，登陆后访问 -->
+                /**=anon
             </value>
         </property>
     </bean>
+
 </beans>

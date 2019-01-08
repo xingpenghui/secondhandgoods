@@ -12,15 +12,16 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="cacheEnabled" value="true" />
 	</settings>
-	<!-- 2、起别名 -->
+
+	<!-- 2、实体类起别名 -->
 	<typeAliases>
-		<!--<typeAlias type="com.god.domain.User" alias="user" />-->
+		<typeAlias type="com.qfedu.admin.entity.User" alias="user" />
 	</typeAliases>
-	<!-- 3、设置分页插件数据库方言 -->
+
+	<!-- 3、使用GitHub分页插件设置数据库方言 -->
 	<plugins>
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">
 			<property name="helperDialect" value="mysql"/>
 		</plugin>
 	</plugins>
-
 </configuration>

@@ -94,7 +94,7 @@ public class MyBatisPlus_Auto {
            
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
+                return projectPath + "/src/main/resources/dao/" + pc.getModuleName()
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });

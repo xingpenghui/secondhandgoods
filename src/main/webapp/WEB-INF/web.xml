@@ -1,58 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>secondhandgoods</display-name>
-  
-  <!--1、配置spring的配置文件 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		 version="3.1">
+	<display-name>SSMProject</display-name>
+
+	<!-- 1、配置spring的配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
+		<!-- 需要引入的spring-bean的目录 -->
 		<param-value>classpath:spring-*.xml</param-value>
 	</context-param>
-	<!--2、配置spring的监听器 -->
+
+	<!-- 2、配置spring的监听器，引入spring-bean配置，web项目启动时，加载spring的配置 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!--3、springMVC前端控制器 -->
+
+	<!-- 3、springMVC前端控制器 -->
 	<servlet>
-		<servlet-name>springmvc</servlet-name>
+		<!-- 起名 -->
+		<servlet-name>DispatchServlet</servlet-name>
+		<!-- 指定类 -->
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 初始化参数 -->
 		<init-param>
+			<!-- 起名 -->
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springmvc.xml</param-value>
+			<!-- 值 -->
+			<!-- classpath表示WEB-INF/classes -->
+			<param-value>classpath:spring-mvc.xml</param-value>
 		</init-param>
+		<!-- tomcat服务器启动时，创建servlet对象 -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<!-- 4、springMVC前端控制器的拦截规则 -->
 	<servlet-mapping>
-		<servlet-name>springmvc</servlet-name>
+		<!-- 起名 -->
+		<servlet-name>DispatchServlet</servlet-name>
+		<!-- 匹配规则 -->
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+	<!-- 5、使用spring的过滤器处理中文乱码 -->
 	<filter>
-		<filter-name>encoding</filter-name>
+		<!-- 防止post方式请求参数乱码 -->
+		<filter-name>characterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
+
+	<!-- 6、过滤器拦截规则 -->
 	<filter-mapping>
-		<filter-name>encoding</filter-name>
+		<filter-name>characterEncoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- 	 <!--shiro 过滤器
-    <filter>
-        <filter-name>shiroFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        &lt;!&ndash; 设置true由servlet容器控制filter的生命周期 &ndash;&gt;
-        <init-param>
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
--->	<welcome-file-list>
+
+	<!-- 7、配置restful风格的请求设置,将 post转为 put or delete提交方式 -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+
+	<!-- 8、请求拦截设置 -->
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 9、shiro 过滤器-->
+	<!--<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		&lt;!&ndash; 设置true由servlet容器控制filter的生命周期 &ndash;&gt;
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>-->
+	<!-- 10、shiro拦截规则 -->
+	<!--<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>-->
+
+	<!-- 9、欢迎页面 -->
+	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+
 </web-app>

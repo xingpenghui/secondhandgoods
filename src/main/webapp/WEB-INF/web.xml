@@ -3,8 +3,6 @@
   <display-name>secondhandgoods</display-name>
   
   <!--1、配置spring的配置文件 -->
-
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-*.xml</param-value>
